@@ -1,0 +1,213 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body{
+  user-select: none;
+}
+
+/*关于格子的大小设定, 需要有一个最大值, 最小值, 中间区域可以自适应.这样比较好?*/
+
+ul,
+li {
+  list-style: none;
+  user-select: none;
+}
+
+ul {
+  /*给父级定下大小, 然后用flex布局对子级进行排版, 即, 父级要做好宽高设定*/
+  /*用百分比,还是rem?*/
+  /*如果用父级进行排版,则有个问题, 现在的排版父级的宽高时根据 2/1 的比例来设定的, 其他情况必然不是2/1*/
+  /*所以这种设定不太好, 而且我们要求的是格子必须是正方形.*/
+  /*如果非要这么做, 有没有办法?*/
+  /*如果游戏开始时, 列数和行数是确定的, 在初始化时, 根据这个比例进行对css的设置?*/
+  /*可以尝试一下, 如果不行, 就用子级调整宽高, 父级撑开的方法*/
+  /*问题, flex布局 如何进行表格布局?*/
+  /*当只有一个层级时, 需要确定子级的宽高才能实现自然转行.*/
+  /*但自己的宽高无法通过百分比来实现*/
+  /* 所以先不用flex 直接用百分比吧*/
+  width: 100vw;
+  max-width: 900px;
+  max-height: 450px;
+  min-width: 475px;
+  min-height: 238px;
+  /*border: 1px solid black;*/
+  font-size: 0;
+  /*居中*/
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+li {
+  display: inline-block;
+  box-sizing: border-box;
+  border: 1px solid black;
+  /*border-collapse: collapse; 竟然失效.*/
+  width: calc(80vw / 30);
+  height: calc(80vw / 30);
+  font-size: 1.5vw;
+  background-color: whitesmoke;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: top;
+  /*没有这一句, 按照目前的样式布局, 会出现问题*/
+}
+
+.a0 {
+  background-color: aquamarine;
+  color: transparent;
+}
+
+.a1 {
+  color: blue;
+}
+
+.a2 {
+  color: blueviolet;
+}
+
+.a3 {
+  color: brown;
+}
+
+.a4 {
+  color: #00BBEE;
+}
+
+.a5 {
+  color: #00438A;
+}
+
+.a6 {
+  color: chocolate;
+}
+
+.a7 {
+  color: crimson;
+}
+
+.a8 {
+  color: green;
+}
+
+.a9 {
+  color: black;
+}
+
+.a10 {
+  background-color: purple;
+  color: pink;
+}
+
+.que {
+  color: black;
+}
+.mark {
+  color: deeppink;
+}
+
+.restart {
+  width: 7vw;
+  height: 7vw;
+  min-width: 37px;
+  min-height: 37px;  font-size: 2vw;
+  border: 1px solid black;
+  text-align: center;
+  line-height: 7vw;
+  border-radius: 50%;
+  position: fixed;
+  left: 50%;
+  top: 0%;
+  transform: translate(-50%, 50%);
+}
+
+.showTime {
+  width: 7vw;
+  height: 7vw;
+  min-width: 37px;
+  min-height: 37px;
+  font-size: 2vw;
+  border: 1px solid black;
+  text-align: center;
+  line-height: 7vw;
+  border-radius: 50%;
+  position: fixed;
+  left: 70%;
+  top: 0%;
+  transform: translate(-50%, 50%);
+}
+
+.showBoom {
+  width: 7vw;
+  height: 7vw;
+  min-width: 37px;
+  min-height: 37px;  font-size: 2vw;
+  border: 1px solid black;
+  text-align: center;
+  line-height: 7vw;
+  border-radius: 50%;
+  position: fixed;
+  left: 30%;
+  top: 0%;
+  transform: translate(-50%, 50%);
+}
+
+/*弄一下初始化的弹窗*/
+/* 首先他是要display:none 的*/
+/* 其次*要进行绝对定位, 并且要在其他元素之上/
+ * 当点击开始游戏之后,要消失
+ * 
+ * 用的是四列
+ * 我们可以尝试用flex 布局
+ */
+
+.fakeBody {
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 98;
+}
+
+.options {
+  width: 30vw;
+  height: 40vw;
+  border: 1px solid #CCCCCC;
+  border-radius: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  
+  background-color: white;
+  
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 99;
+}
+
+.options div{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 3vw;
+}
+
+.options div *{
+  display: block;
+  width: 30%;
+  height: 100%;
+  text-align: center;
+  flex-grow: 1;
+  font-size: 1.5vw;
+  border: 1px solid #CCCCCC;
+  line-height: 3vw;
+  font-weight: bold;
+  border-radius: 10%;
+}
