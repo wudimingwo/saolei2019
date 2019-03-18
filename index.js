@@ -322,12 +322,13 @@ boomDom.addEventListener('input',function () {
 function resizeLi (x,y,dir) {// 严格来讲, 由于格子要保持方形, 所以y值似乎没用.
 	var liArr = [].slice.call(document.getElementsByTagName('li'));
 	var oUl = document.getElementsByTagName('ul')[0];
+	var body = document.body;
 	if (dir) {// 横屏时
 	  var widthB = window.innerWidth * 0.6; 
 	  var heightB = window.innerHeight * 0.9; 
 	} else{ // 竖屏时
-	  var widthB = body.innerHeight  * 0.6; 
-	  var heightB = body.innerWidth * 0.9; 
+	  var widthB = window.innerHeight  * 0.9; 
+	  var heightB = window.innerWidth * 0.9; 
 	}
 	var width = widthB / x;
 	if(width * y > heightB) {
