@@ -176,12 +176,12 @@ function bindEvent (oUl,arr) {
 function init (x,y,boom) {
   document.getElementsByTagName('ul')[0] && document.getElementsByTagName('ul')[0].remove(); 
   var oUl = document.createElement('ul');
-  document.body.appendChild(oUl);
+  document.getElementsByClassName('fakeBody2')[0].appendChild(oUl);
   var arr = createData(y,x,oUl,boom);
   createLei(y,x,boom,arr);
   createNumber(arr);
   bindEvent(oUl,arr);
-  resizeLi(data.row);
+  resizeLi(data.row,data.column,data.dir);
 }
 
 
@@ -224,10 +224,16 @@ var optionsDom = document.getElementsByClassName('options')[0];
 var rowDom = document.getElementById('row');
 var columnDom = document.getElementById('column');
 var boomDom = document.getElementById('boom');
+
+var menuDom = document.getElementsByClassName('menu')[0] || document.getElementsByClassName('menuD')[0]; 
+var changeDirDom = document.getElementsByClassName('changeDir')[0];
+var optionButtonDom = document.getElementsByClassName('optionButton')[0];
+
 var data = {
   row : 30,
   column : 16,
-  boom : 99
+  boom : 99,
+  dir : true // 用来表示方向
 }
 var fun = {
   '高级' : function () {
@@ -257,7 +263,7 @@ var fun = {
   '开始游戏' : function () {
   	init(data.row,data.column,data.boom);
 	  getTimeStr(showTimeDom);
-  	optionsDom.parentElement.style.display = "none";
+  	optionsDom.parentElement.style.display = "none";// 配置选项窗口消失
   }
 }
 
@@ -269,6 +275,27 @@ optionsDom.addEventListener('click',function (e) {
 	  fun[inText]();
 	}
 })
+
+changeDirDom.addEventListener('click',function (e) {
+  console.log(data.row,data.column,data.dir);
+	data.dir = !data.dir;
+	if (data.dir) {
+		changeDirDom.innerText = "竖屏"
+		menuDom.className = "menu";
+		document.body.style.transform = "rotate(0deg)";
+	} else{
+	  changeDirDom.innerText = "横屏"
+	  menuDom.className = "menuD";
+	  document.body.style.transform = "rotate(90deg)";
+	}
+	resizeLi(data.row,data.column,!data.dir);
+})
+
+optionButtonDom.addEventListener('click',function (e) {
+  // 让option 屏显示
+optionsDom.parentElement.style.display = "block";})
+
+
 
 rowDom.addEventListener('input',function () {
   var val =  parseInt(this.value);
@@ -292,16 +319,32 @@ boomDom.addEventListener('input',function () {
   val = val < 10 ? 10 : (val > 99 ? 99 : val);
 })
 
-function resizeLi (x,y) {// 严格来讲, 由于格子要保持方形, 所以y值似乎没用.
+function resizeLi (x,y,dir) {// 严格来讲, 由于格子要保持方形, 所以y值似乎没用.
 	var liArr = [].slice.call(document.getElementsByTagName('li'));
+	var oUl = document.getElementsByTagName('ul')[0];
+	if (dir) {// 横屏时
+	  var widthB = window.innerWidth * 0.6; 
+	  var heightB = window.innerHeight * 0.9; 
+	} else{ // 竖屏时
+	  var widthB = body.innerHeight  * 0.6; 
+	  var heightB = body.innerWidth * 0.9; 
+	}
+	var width = widthB / x;
+	if(width * y > heightB) {
+	  width = heightB / y;
+	};
+	
+	
+	oUl.style.width = width * x + 'px';
+	oUl.style.height = width * y + 'px';
 	liArr.forEach(function (item) {
-	  var width = document.getElementsByTagName('ul')[0].offsetWidth / x;
 		item.style.width = width + "px";
 		item.style.height = width + "px";
+		item.style.lineHeight = width + 'px';// 用来让文字居中.
 	})
 }
 
 document.body.onresize = function () {
-	resizeLi(data.row,data.column)
+	resizeLi(data.row,data.column,data.dir)
 }
 

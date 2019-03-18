@@ -2,8 +2,13 @@
   margin: 0;
   padding: 0;
 }
+html{
+  height: 100%;
+}
 body{
   user-select: none;
+  height: 100%;
+   direction: rtl;
 }
 
 /*关于格子的大小设定, 需要有一个最大值, 最小值, 中间区域可以自适应.这样比较好?*/
@@ -12,6 +17,16 @@ ul,
 li {
   list-style: none;
   user-select: none;
+}
+
+.fakeBody2 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 ul {
@@ -27,17 +42,18 @@ ul {
   /*但自己的宽高无法通过百分比来实现*/
   /* 所以先不用flex 直接用百分比吧*/
   width: 100vw;
-  max-width: 900px;
-  max-height: 450px;
-  min-width: 475px;
-  min-height: 238px;
+  /*下面这一堆先不用了, 响应式的处理, 给了js*/
+  /*max-width: 900px;*/
+  /*max-height: 450px;*/
+  /*min-width: 475px;*/
+  /*min-height: 238px;*/
   /*border: 1px solid black;*/
   font-size: 0;
   /*居中*/
-  position: absolute;
+  /*position: relative;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  transform: translate(-50%, 0);*/
 }
 
 li {
@@ -108,19 +124,58 @@ li {
   color: deeppink;
 }
 
-.restart {
+.menu {
   width: 7vw;
-  height: 7vw;
+  height: 70vh;
   min-width: 37px;
-  min-height: 37px;  font-size: 2vw;
-  border: 1px solid black;
+  min-height: 37px; 
+  font-size: 1.8vw;
   text-align: center;
-  line-height: 7vw;
-  border-radius: 50%;
+  line-height: 5vw;
   position: fixed;
-  left: 50%;
-  top: 0%;
-  transform: translate(-50%, 50%);
+  left: 0%;
+  top: 50%;
+  transform: translate(50%, -50%);
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.menu div{
+  width: 5vw;
+  height: 5vw;
+  border: 1px solid black;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.menuD {
+  width: 7vh;
+  height: 70vw;
+  min-width: 37px;
+  min-height: 37px; 
+  font-size: 1.8vh;
+  text-align: center;
+  line-height: 5vh;
+  position: fixed;
+  left: 10%;
+  top: 50%;
+  transform: translate(50%, -50%);
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.menuD div{
+  width: 5vh;
+  height: 5vh;
+  border: 1px solid black;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+/*.restart {
 }
 
 .showTime {
@@ -152,7 +207,7 @@ li {
   left: 30%;
   top: 0%;
   transform: translate(-50%, 50%);
-}
+}*/
 
 /*弄一下初始化的弹窗*/
 /* 首先他是要display:none 的*/
