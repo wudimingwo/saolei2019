@@ -189,7 +189,6 @@ function bindEvent (oUl,arr) {
 	oUl.addEventListener('contextmenu',function (e) {
 	  var dom = e.target;
    if (dom.className.indexOf("front") != -1) {
-     console.log(123);
      var item = dom.parentNode.item;
      if (item.noClick) {
      	if (typeof item.count == "undefined") {
