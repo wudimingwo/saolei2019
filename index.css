@@ -4,12 +4,32 @@
 }
 html{
   height: 100%;
+            overflow: hidden;
+  
 }
 body{
   user-select: none;
-  height: 100%;
-   direction: rtl;
+                 width: 100vw;
+              height: 100vh;
+              background-image: linear-gradient(45deg ,pink, purple, gray);
+              background-size: 300%;
+              background-position: 0% 0%;
+              transform: rotate(0deg);
+              /*animation: bodyR 5s alternate infinite;*/
 }
+
+            @keyframes bodyR{
+              from{
+                background-position: 0% 0%;
+                
+              }
+              50% {
+                0% 100%
+              }
+              to{
+                background-position: 100% 100%;
+              }
+            }
 
 /*关于格子的大小设定, 需要有一个最大值, 最小值, 中间区域可以自适应.这样比较好?*/
 
@@ -30,6 +50,7 @@ li {
 }
 
 ul {
+              transform-style:preserve-3d;
   /*给父级定下大小, 然后用flex布局对子级进行排版, 即, 父级要做好宽高设定*/
   /*用百分比,还是rem?*/
   /*如果用父级进行排版,则有个问题, 现在的排版父级的宽高时根据 2/1 的比例来设定的, 其他情况必然不是2/1*/
@@ -59,11 +80,10 @@ ul {
 li {
   display: inline-block;
   box-sizing: border-box;
-  border: 1px solid black;
   /*border-collapse: collapse; 竟然失效.*/
   width: calc(80vw / 30);
   height: calc(80vw / 30);
-  font-size: 1.5vw;
+  font-size: 2vw;
   background-color: whitesmoke;
   font-weight: bold;
   text-align: center;
@@ -71,8 +91,364 @@ li {
   /*没有这一句, 按照目前的样式布局, 会出现问题*/
 }
 
+            .son{
+              perspective : 800px;
+              transform-style: preserve-3d;
+              backface-visibility: hidden;
+              position: relative;
+              transform: scale(0.8) rotateX(-10deg) rotateY(10deg);
+              /*animation: round linear 2.5s infinite;*/
+            }
+            
+            
+              .son div{
+              position: absolute;
+              left: 0;
+              top: 0;
+              
+              width: 100%;
+              height: 100%;
+             
+            }
+           /* 立体方形*/
+           /*此处不能用25px! 也需要用js 有点麻烦, 所以最好是用rem */
+             .front{
+             /*transform: rotate(0deg) translateZ(50%) scale(0.8);*/
+             background-color: #00438A; 
+           }
+           .left{
+             /*transform: rotateY(-90deg) translateZ(50%)  scale(0.8);*/
+             background-color: #159159;
+             
+           }
+           .right{
+             
+             /*transform: rotateY(90deg) translateZ(50%)  scale(0.8);*/
+             background-color: #153987;
+           }
+           .up{
+             /*transform: rotateX(90deg) translateZ(50%)  scale(0.8);*/
+             background-color: #265285;
+             
+           }
+           .down{
+             /*transform: rotateX(-90deg) translateZ(50%) scale(0.8);*/
+             background-color: #A52A2A;
+             
+           }
+           .back{
+             /*transform: rotateX(180deg) translateZ(50%) scale(0.8);*/
+             background-color: aquamarine;
+           }
+            
+            /*浮动态 5种*/
+            @keyframes round{
+              from{
+                transform: rotateY(0deg) scale(0.8);
+              }
+              20% {
+                transform: rotateX(5deg) scale(0.8);
+              }
+              40% {
+                transform: rotateY(-5deg) scale(0.8);
+              }
+              60% {
+                transform: rotateX(-5deg) scale(0.8);
+              }
+              80% {
+                transform: rotateY(5deg) scale(0.8);
+              }
+              to{
+                transform: rotateY(0deg) scale(0.8);
+              }
+            }
+            @keyframes round1{
+              from{
+                transform: rotateX(0deg) rotateY(180deg) scale(0.8);
+              }
+              20% {
+                transform: rotateX(5deg) rotateY(180deg) scale(0.8);
+              }
+              40% {
+                transform: rotateX(0deg) rotateY(175deg) scale(0.8);
+              }
+              60% {
+                transform: rotateX(-5deg) rotateY(180deg) scale(0.8);
+              }
+              80% {
+                transform: rotateX(0deg) rotateY(185deg) scale(0.8);
+              }
+              to{
+                transform: rotateX(0deg) rotateY(180deg) scale(0.8);
+              }
+            }
+            @keyframes round2{
+              from{
+                transform: rotateX(0deg) rotateY(-180deg) scale(0.8);
+              }
+              20% {
+                transform: rotateX(5deg) rotateY(-180deg) scale(0.8);
+              }
+              40% {
+                transform: rotateX(0deg) rotateY(-175deg) scale(0.8);
+              }
+              60% {
+                transform: rotateX(-5deg) rotateY(-180deg) scale(0.8);
+              }
+              80% {
+                transform: rotateX(0deg) rotateY(-185deg) scale(0.8);
+              }
+              to{
+                transform: rotateX(0deg) rotateY(-180deg) scale(0.8);
+              }
+            }
+            @keyframes round3{
+              from{
+                transform: rotateY(0deg) rotateX(180deg) scale(0.8);
+              }
+              20% {
+                transform: rotateY(5deg) rotateX(180deg) scale(0.8);
+              }
+              40% {
+                transform: rotateY(0deg) rotateX(175deg) scale(0.8);
+              }
+              60% {
+                transform: rotateY(-5deg) rotateX(180deg) scale(0.8);
+              }
+              80% {
+                transform: rotateY(0deg) rotateX(185deg) scale(0.8);
+              }
+              to{
+                transform: rotateY(0deg) rotateX(180deg) scale(0.8);
+              }
+            }
+            @keyframes round4{
+              from{
+                transform: rotateY(0deg) rotateX(-180deg) scale(0.8);
+              }
+              20% {
+                transform: rotateY(5deg) rotateX(-180deg) scale(0.8);
+              }
+              40% {
+                transform: rotateY(0deg) rotateX(-175deg) scale(0.8);
+              }
+              60% {
+                transform: rotateY(-5deg) rotateX(-180deg) scale(0.8);
+              }
+              80% {
+                transform: rotateY(0deg) rotateX(-185deg) scale(0.8);
+              }
+              to{
+                transform: rotateY(0deg) rotateX(-180deg) scale(0.8);
+              }
+            }
+            /*临街翻转8种*/
+            .dir1 {
+              animation: dir1 1s 1;
+            }
+            
+            @keyframes dir1{
+              from{
+                transform: rotateY(0deg);
+              }
+              50% {
+                transform: rotateY(45deg);
+              }
+              to{
+                transform: rotateY(0deg);
+              }
+            }
+            .dir2 {
+              animation: dir2 1s 1;
+            }
+            @keyframes dir2{
+              from{
+                transform: rotateY(0deg);
+              }
+              50% {
+                transform: rotateY(-45deg);
+              }
+              to{
+                transform: rotateY(0deg);
+              }
+            }
+            .dir3 {
+              animation: dir3 1s 1;
+            }
+            @keyframes dir3{
+              from{
+                transform: rotateX(0deg);
+              }
+              50% {
+                transform: rotateX(45deg);
+              }
+              to{
+                transform: rotateX(0deg);
+              }
+            }
+            .dir4 {
+              animation: dir4 1s 1;
+            }
+            @keyframes dir4{
+              from{
+                transform: rotateX(0deg);
+              }
+              50% {
+                transform: rotateX(-45deg);
+              }
+              to{
+                transform: rotateX(0deg);
+              }
+            }
+            .dir5 {
+              animation: dir5 1s 1;
+            }
+            @keyframes dir5{
+              from{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+              50% {
+                transform: rotateY(45deg) rotateX(-45deg);
+              }
+              to{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+            }
+            .dir6 {
+              animation: dir6 1s 1;
+            }
+            @keyframes dir6{
+              from{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+              50% {
+                transform: rotateY(-45deg) rotateX(-45deg);
+              }
+              to{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+            }
+            .dir7 {
+              animation: dir7 1s 1;
+            }
+            @keyframes dir7{
+              from{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+              50% {
+                transform: rotateY(-45deg) rotateX(45deg);
+              }
+              to{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+            }
+            .dir8 {
+              animation: dir8 1s 1;
+            }
+            @keyframes dir8{
+              from{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+              50% {
+                transform: rotateY(45deg) rotateX(45deg);
+              }
+              to{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+            }
+            
+            /*翻转180deg八种*/
+            .turn1{
+              animation: turn1 1s 1 forwards;
+            }
+            @keyframes turn1{
+              from{
+                transform: rotateY(10deg) rotateX(10deg) scale(0.8);
+              }
+              to{
+                transform:  rotateY(190deg) rotateX(10deg)  scale(0.8);
+              }
+            }
+            .turn2{
+              animation: turn2 1s 1 forwards;
+            }
+            @keyframes turn2{
+              from{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+              to{
+                transform: rotateY(-180deg) rotateX(0deg);
+              }
+            }
+            .turn3{
+              animation: turn3 1s 1 forwards;
+            }
+            @keyframes turn3{
+              from{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+              to{
+                transform: rotateY(0deg) rotateX(180deg);
+              }
+            }
+            .turn4{
+              animation: turn4 1s 1 forwards;
+            }
+            @keyframes turn4{
+              from{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+              to{
+                transform: rotateY(0deg) rotateX(-180deg);
+              }
+            }
+            .turn5{
+              animation: turn5 1s 1 forwards;
+            }
+            @keyframes turn5{
+              from{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+              to{
+                transform: rotate3d(1,1,0,180deg);
+              }
+            }
+            .turn6{
+              animation: turn6 1s 1 forwards;
+            }
+            @keyframes turn6{
+              from{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+              to{
+                transform: rotate3d(-1,1,0,180deg);
+              }
+            }
+            .turn7{
+              animation: turn7 1s 1 forwards;
+            }
+            @keyframes turn7{
+              from{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+              to{
+                transform: rotate3d(1,-1,0,180deg);
+              }
+            }
+            .turn8{
+              animation: turn8 1s 1 forwards;
+            }
+            @keyframes turn8{
+              from{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+              to{
+                transform: rotate3d(-1,-1,0,180deg);
+              }
+            }
+
 .a0 {
-  background-color: aquamarine;
+  background-color: purple;
   color: transparent;
 }
 

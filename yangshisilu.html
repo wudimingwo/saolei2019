@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewprot" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+        <title>dddd</title>
+        <style type="text/css">
+          html {
+            overflow: hidden;
+          }
+            body{
+              width: 100vw;
+              height: 100vh;
+              background-image: linear-gradient(45deg ,pink, purple, gray);
+              background-size: 300%;
+              background-position: 0% 0%;
+              transform: rotate(0deg);
+              animation: bodyR 5s alternate infinite;
+            }
+            
+            @keyframes bodyR{
+              from{
+                background-position: 0% 0%;
+                
+              }
+              50% {
+                0% 100%
+              }
+              to{
+                background-position: 100% 100%;
+              }
+            }
+            
+            .father{
+              width: 500px;
+              height: 500px;
+              border: 1px solid black;
+              
+              position: absolute;
+              /*left: 50%;
+              top: 50%;*/
+              transform: translateZ(-50%,-50%);
+              transform-style:preserve-3d;
+            }
+            .son{
+              width: 50px;
+              height: 50px;
+               position: absolute ;
+              left: 50%;
+              top: 50%;
+              transform-style:preserve-3d;
+              perspective : 800px;
+              transform: ratate3d(1,1,0,180deg);
+              backface-visibility: hidden;
+              animation: round linear 2.5s infinite;
+            }
+            
+            @keyframes round{
+              from{
+                transform: rotateY(0deg);
+              }
+              20% {
+                transform: rotateX(5deg);
+              }
+              40% {
+                transform: rotateY(-5deg);
+              }
+              60% {
+                transform: rotateX(-5deg);
+              }
+              80% {
+                transform: rotateY(5deg);
+              }
+              to{
+                transform: rotateY(0deg);
+              }
+            }
+            @keyframes round1{
+              from{
+                transform: rotateX(0deg) rotateY(180deg);
+              }
+              20% {
+                transform: rotateX(5deg) rotateY(180deg);
+              }
+              40% {
+                transform: rotateX(0deg) rotateY(175deg);
+              }
+              60% {
+                transform: rotateX(-5deg) rotateY(180deg);
+              }
+              80% {
+                transform: rotateX(0deg) rotateY(185deg);
+              }
+              to{
+                transform: rotateX(0deg) rotateY(180deg);
+              }
+            }
+            @keyframes round2{
+              from{
+                transform: rotateX(0deg) rotateY(-180deg);
+              }
+              20% {
+                transform: rotateX(5deg) rotateY(-180deg);
+              }
+              40% {
+                transform: rotateX(0deg) rotateY(-175deg);
+              }
+              60% {
+                transform: rotateX(-5deg) rotateY(-180deg);
+              }
+              80% {
+                transform: rotateX(0deg) rotateY(-185deg);
+              }
+              to{
+                transform: rotateX(0deg) rotateY(-180deg);
+              }
+            }
+            @keyframes round3{
+              from{
+                transform: rotateY(0deg) rotateX(180deg);
+              }
+              20% {
+                transform: rotateY(5deg) rotateX(180deg);
+              }
+              40% {
+                transform: rotateY(0deg) rotateX(175deg);
+              }
+              60% {
+                transform: rotateY(-5deg) rotateX(180deg);
+              }
+              80% {
+                transform: rotateY(0deg) rotateX(185deg);
+              }
+              to{
+                transform: rotateY(0deg) rotateX(180deg);
+              }
+            }
+            @keyframes round4{
+              from{
+                transform: rotateY(0deg) rotateX(-180deg);
+              }
+              20% {
+                transform: rotateY(5deg) rotateX(-180deg);
+              }
+              40% {
+                transform: rotateY(0deg) rotateX(-175deg);
+              }
+              60% {
+                transform: rotateY(-5deg) rotateX(-180deg);
+              }
+              80% {
+                transform: rotateY(0deg) rotateX(-185deg);
+              }
+              to{
+                transform: rotateY(0deg) rotateX(-180deg);
+              }
+            }
+            
+            .son div{
+              position: absolute;
+              left: 0;
+              top: 0;
+              
+              width: 100%;
+              height: 100%;
+             
+             border-radius: 5px;
+            }
+            /*弄一个六边形*/
+           /* 先rotate, 然后translate*/
+           .front{
+             transform: rotate(0deg) translateZ(25px) scale(0.8);
+             background-color: #C1E2B3;
+           }
+           .left{
+             transform: rotateY(-90deg) translateZ(25px)  scale(0.8);
+             background-color: #159159;
+             
+           }
+           .right{
+             
+             transform: rotateY(90deg) translateZ(25px)  scale(0.8);
+             background-color: #153987;
+           }
+           .up{
+             transform: rotateX(90deg) translateZ(25px)  scale(0.8);
+             background-color: #265285;
+             
+           }
+           .down{
+             transform: rotateX(-90deg) translateZ(25px) scale(0.8);
+             background-color: #A52A2A;
+             
+           }
+           .back{
+             transform: rotateX(180deg) translateZ(25px) scale(0.8);
+             background-color: purple;
+           }
+           
+           /*大概出来了一个立体模型,*/
+          /*常态的浮动 也简单模拟了一下*/
+         /* 只需要让各自的 delay 不相同, 应该会有浮动的效果 试一下*/
+        
+            .dir1 {
+              animation: dir1 1s 1;
+            }
+            
+            @keyframes dir1{
+              from{
+                transform: rotateY(0deg);
+              }
+              50% {
+                transform: rotateY(45deg);
+              }
+              to{
+                transform: rotateY(0deg);
+              }
+            }
+            .dir2 {
+              animation: dir2 1s 1;
+            }
+            @keyframes dir2{
+              from{
+                transform: rotateY(0deg);
+              }
+              50% {
+                transform: rotateY(-45deg);
+              }
+              to{
+                transform: rotateY(0deg);
+              }
+            }
+            .dir3 {
+              animation: dir3 1s 1;
+            }
+            @keyframes dir3{
+              from{
+                transform: rotateX(0deg);
+              }
+              50% {
+                transform: rotateX(45deg);
+              }
+              to{
+                transform: rotateX(0deg);
+              }
+            }
+            .dir4 {
+              animation: dir4 1s 1;
+            }
+            @keyframes dir4{
+              from{
+                transform: rotateX(0deg);
+              }
+              50% {
+                transform: rotateX(-45deg);
+              }
+              to{
+                transform: rotateX(0deg);
+              }
+            }
+            .dir5 {
+              animation: dir5 1s 1;
+            }
+            @keyframes dir5{
+              from{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+              50% {
+                transform: rotateY(45deg) rotateX(-45deg);
+              }
+              to{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+            }
+            .dir6 {
+              animation: dir6 1s 1;
+            }
+            @keyframes dir6{
+              from{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+              50% {
+                transform: rotateY(-45deg) rotateX(-45deg);
+              }
+              to{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+            }
+            .dir7 {
+              animation: dir7 1s 1;
+            }
+            @keyframes dir7{
+              from{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+              50% {
+                transform: rotateY(-45deg) rotateX(45deg);
+              }
+              to{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+            }
+            .dir8 {
+              animation: dir8 1s 1;
+            }
+            @keyframes dir8{
+              from{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+              50% {
+                transform: rotateY(45deg) rotateX(45deg);
+              }
+              to{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+            }
+            
+            .turn1{
+              animation: turn1 1s 1 forwards;
+            }
+            @keyframes turn1{
+              from{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+              to{
+                transform: rotateY(180deg) rotateX(0deg);
+              }
+            }
+            .turn2{
+              animation: turn2 1s 1 forwards;
+            }
+            @keyframes turn2{
+              from{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+              to{
+                transform: rotateY(-180deg) rotateX(0deg);
+              }
+            }
+            .turn3{
+              animation: turn3 1s 1 forwards;
+            }
+            @keyframes turn3{
+              from{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+              to{
+                transform: rotateY(0deg) rotateX(180deg);
+              }
+            }
+            .turn4{
+              animation: turn4 1s 1 forwards;
+            }
+            @keyframes turn4{
+              from{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+              to{
+                transform: rotateY(0deg) rotateX(-180deg);
+              }
+            }
+            .turn5{
+              animation: turn5 1s 1 forwards;
+            }
+            @keyframes turn5{
+              from{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+              to{
+                transform: rotate3d(1,1,0,180deg);
+              }
+            }
+            .turn6{
+              animation: turn6 1s 1 forwards;
+            }
+            @keyframes turn6{
+              from{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+              to{
+                transform: rotate3d(-1,1,0,180deg);
+              }
+            }
+            .turn7{
+              animation: turn7 1s 1 forwards;
+            }
+            @keyframes turn7{
+              from{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+              to{
+                transform: rotate3d(1,-1,0,180deg);
+              }
+            }
+            .turn8{
+              animation: turn8 1s 1 forwards;
+            }
+            @keyframes turn8{
+              from{
+                transform: rotateY(0deg) rotateX(0deg);
+              }
+              to{
+                transform: rotate3d(-1,-1,0,180deg);
+              }
+            }
+            
+           /* 现在我们先弄一下 , 彻底翻转的逻辑与样式*/
+           /*需要让整个格子反过来, rotateX(180deg)*/
+           /*如果是翻转180deg, 那么就是让背面, 抵达前面*/
+           /*这么做的话, 难点在于, 我希望翻转之后, 还能继续有浮动效果.
+            
+            * 而两者都需要用到rotateX, 或者rotateY, 目测有点麻烦,
+            * 稍微简单的方案是, 翻转360deg, 监听旋转结束时, 更换一下类名, 以及把数据展现出来.
+            * 如此之后, 原先的浮动就还是浮动.
+            * 
+            * 不对啊, 360deg 之后, 还是会和原来的rotate角度产生影响.
+            * 那就用180deg, 然后, 再弄一个类名, 进行切换
+            * 
+            * 
+            * 问题2. 360deg 的翻转和, 临阵翻转, 两者之间的冲突问题.
+            * 首先, 如果是需要360deg翻转的, 就不必添加临阵翻转的动作. 所以需要判断, 如果是空格子, 则通常会发生一连串的360deg翻转
+            * 如果是, 数字, 就会发生临阵翻转.
+            * 
+            * 这里确实有点不好整理.
+            * 因为有一种情况是, 当点击空格子时, 会有扩散,
+            * 当扩散到数字格子之后,
+            * 相当于, 数字格子被点击, 数字格子自然只需要翻转, 但临近格子呢?
+            * 视觉上, 肯定是需要让临近格子中, 未翻转的进行翻转, 已经翻转的不需要翻转.
+            * 
+            * 我们先简单思考, 只要是空白格, 就不用考虑临阵翻转,
+            * 只要是数字格, 就执行临阵翻转, 
+            * 然后给一个优先级, 如果正在进行 360deg翻转, 则临阵翻转不执行, 
+            * 如果正在进行临阵翻转, 则360deg可以覆盖.
+            * 
+            * 好, 虽然头绪很多, 不知从何下手, 但基本的逻辑, 似乎已经能够走得通了.
+            * 
+            * 哎, 瞬间, 感觉凌乱了.
+            * 
+            * */
+            
+            
+            .son1 {
+              left: 30%;
+              top: 50%;
+            }
+        </style>
+    </head>
+    <body>
+      
+      <div class="father">
+        <!--凑个六边形 最后数据展示在底面? 试一下-->
+        <div class="son">
+          <div class="front"></div>
+          <div class="up"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+          <div class="down"></div>
+          <div class="back"></div>
+        </div>
+        <div class="son son1">
+          <div class="front"></div>
+          <div class="up"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+          <div class="down"></div>
+          <div class="back"></div>
+        </div>
+      </div>
+      
+         <!--<iframe id="b" width="1000px" height="700px" class="b video_pc" src="https://www.bilibili.com/video/av26050688/?p=9" frameborder="0" allowfullscreen="true">
+</iframe>-->
+<!--<iframe src="//player.bilibili.com/player.html?aid=23459945&cid=39139016&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>-->
+<!--<iframe src="//player.bilibili.com/player.html?aid=26050688&cid=51986342&page=9" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>-->
+        <script type="text/javascript">
+          // 类名的切换必须由js来完成
+          // 现在要弄几个animation, 也就是, 波浪扩散时的晃动.
+          // 理论上讲, 存在八个方向的晃动, 我们在初期版本中, 先不要进行扩散运动, 就解决一下, 最基础的周边8个的晃动.
+          // 我们弄8个类名, 每个类名将拥有一个晃动,
+          // 事件发生时, 我们添加类名, 动画结束时, 我们去掉类名.
+          // 这里有个问题, animation 动画的结束怎么监测 百度得知用 onAnimationEnd()
+          // 测试一下,, 不行这是 安卓的
+          // 
+          // 然后再加一个类名是用来翻转180deg 用来翻转的.
+          
+          
+          // 彻底翻转需要四个方向, 或者八个方向.
+          // 如何判断方向? 这需要根据扩算运算. 很明显, 我写的扩散运算, 应该是深度优先?
+          // 但在初级版本这也无所谓.
+          // 想要确定当前格子的翻转方向, 
+          // 就必须要知道是从哪个格子传过来的, 所以最好是, 广度优先原则.
+          // 广度优先, 就要求, 先进先出.
+          // 我写得那个, 应该是, 深度优先.
+          // 这里先放着这个问题.
+          // 我们先把样式给干上去.
+          // 回到上一个问题, 当前格子的翻转方向, 需要知道前一个格子是谁, 需要知道前一个格子的信息.
+          // 可能的几种方案,
+          // 第一种, 把前面格子的坐标传过去(直接, 或间接), 根据,两个的坐标对比, 确定方向.比如(1,1)(1,2) 相减(0,1), 
+          // 即,两个临近坐标相减 能够出来八个坐标, 可代表八个方向.
+          // 第二种思路, 就是把代表方向的字符串传递给后者, 后者直接根据这个字符串进行处理.
+          // 很明显, 第二种思路不容易走得通. 应该用第一种思路.
+          // 之前我们进行扩散算法时, 用得是数组的二维坐标,
+          // 即, 每个格子找它临近的格子时, 需要把自身的坐标给数组这个地图, 通过加减才能找到.
+          // 另一种思路是, 类似邻接链表, 即, 我这个单位里, 根据八个方向, 我存储八个临近格子.
+          // 这样的话, 我遍历周边格子时, 就不需要通过数组, 而是直接获取.
+          // 两者相比较之时, 前者是运算量上应该会更多一点,
+          // 后者是在空间上, 占用会多一点, 但运算速度可能相对更快一点.
+          
+          // 这个方案, 留到后面需要优化的时候进行考虑.
+          
+          // 现在稍微感觉复杂的地方是, 类名很多, 需要怎么进行切换 需要好好规划一下.
+          
+          // 刚开始是 round
+          // 点击之后, 需要翻转, 默认是 向左
+          // 扩散翻转时, 根据方向, 进行翻转   turn系列
+          // 遇到数字时, 进行临街格子的翻转. dir系列
+          // 已经翻转过的格子, 类名切花成round1
+          
+          // 现在把, 翻转180deg的类名弄一下
+          
+          
+          
+          // 遇到消耗时间比较长的的问题, 
+          // 首先是, 当结构翻转180deg之后, 想让其拥有浮动效果, rotate不知道出了什么问题, 
+          // 行为方式, 与预想的不一致. 
+          // 解决了, 问题的原因是, 在keyframe中设置 rotate时, 只设置一个方向的, 另一个方向会存在默认值, 所以才会出现这个问题.
+          
+          // 你妹的, 发现不能只有round1, 还要有round2-8, 肯定存在简单的方法...妈的.感觉走错路了.
+          
+          
+            var son = document.getElementsByClassName('son');
+            function aniDelay (div,time) {
+              div.style.animationDelay = time + "s";
+            }
+            for(var i = 0 ; i < son.length; i++) {
+              aniDelay(son[i],Math.random() * 2);
+            }
+            
+            
+            // 测试一下
+            // 我点击 son1时, son2 进行旋转, 然后回到正常状态
+            
+            
+            // 第一个问题是
+            // 为什么back 在前面?
+            
+            function changeClassName (div,str,rex) {// 用来切换类名
+              var str = " " + str; 
+              var claName = div.className;
+              var rex = rex || clName;
+              claName = claName.replace(rex,'') + str;
+              div.className = claName;
+            }
+            
+            // 生成随机正整数, 闭区间
+            function returnRandomNum (a,b) {//
+              return Math.round(Math.random() * (b - a)) + a;
+            }
+            son[0].addEventListener('click',function (e) {
+              
+              // 给 son2 添加类名
+              // 两个数据, 一个是, 要添加的类名(String) 一个是要删除的类名组(arr), 
+              // 可以用repalce 加正则, 所以不需要类名组, 只需要给个正则即可.
+              
+              console.log(e.target);
+              var rex = /\sdir[1-9]/g;
+              var rex2 = /\sturn[1-9]/g;
+               var str = "turn" +returnRandomNum(1,8);
+              aniDelay(son[1],0);// 我希望延迟少一点
+              changeClassName(son[1],str,rex2);
+              // 并监听son2 的动画结束
+              // 当动画结束时, 去掉类名
+              // 类名的切换不能是简单的 覆盖.
+              // 原有类名有可能要保存
+              
+              son[1].addEventListener('webkitAnimationEnd',function () {
+                son[1].removeEventListener('webkitAnimationEnd',arguments.callee);
+              aniDelay(son[1],Math.random() * 2);// 延迟又变得随机 
+                changeClassName(this,"",rex);
+              },null);
+              
+              // 现在测试, 点击时, 类名随机切换
+            },null);
+            
+            
+        function detectAnimationEndEvents(el){
+        var t;
+        var animEndEventNames = {
+            'WebkitAnimation' : 'webkitAnimationEnd',
+            'OAnimation' : 'oAnimationEnd',
+            'msAnimation' : 'MSAnimationEnd',
+            'animation' : 'animationend'
+        };
+        for(t in animEndEventNames){
+            if( el.style[t] !== undefined ){
+              console.log(animEndEventNames[t]);
+                return animEndEventNames[t];
+            }
+        }
+    }
+
+            
+        </script>
+    </body>
+</html>

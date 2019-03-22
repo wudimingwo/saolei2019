@@ -10,7 +10,14 @@ function createData (a,b,oUl,boom) {
 	  for(var j = 0 ; j < b ; j++) {
 	    var it = item[j] = {};
 	    it.dom = document.createElement('li');
-	    var dom = it.dom; 
+	    var dom = it.dom;
+	    dom.className = "son";
+	    dom.innerHTML = `<div class="front"></div>
+          <div class="up"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+          <div class="down"></div>
+          <div class="back"></div>`;
 	    oUl.appendChild(dom);
 	    it.tag = 0; 
 	    it.y = i;
@@ -26,6 +33,23 @@ function returnRandom (a) {
 	return Math.floor(Math.random() * a);
 }
 
+            function aniDelay (div,time) {//  设置div的延迟
+              div.style.animationDelay = time + "s";
+            }
+
+            function changeClassName (div,str,rex) {// 用来切换类名
+              var str = " " + str; 
+              var claName = div.className;
+              var rex = rex || "";
+              claName = claName.replace(rex,'') + str;
+              div.className = claName;
+            }
+           function returnRandomNum (a,b) {// 生成随机正整数
+              return Math.round(Math.random() * (b - a)) + a;
+            }
+           
+           
+           
 
 function createLei (a,b,boom,arr) {
 	while (boom) {
@@ -85,32 +109,52 @@ function start (item,arr) {// 翻转函数 + 扩散函数
     item.noClick = false;
     arr.total--;
     var dom = item.dom;
+    var back = dom.lastElementChild;
   	var tag = item.tag;
-  	claName = 'a' + tag;
+  	claName = 'a' + tag;// a 系列的tag , 应该给back元素, 而不是son元素.
+  	
+  	// 应该给翻转的类名. // 暂时用最简单的方案.
+  	  changeClassName(dom,"turn1","");
+  	// 然后要监听是否完成, 完成之后, 要添加round1
+//	back.addEventListener("animationend",function () {
+//		this.removeEventListener("animationend",arguments.callee,null);
+  		//此处只需要更改, 动画名
+//		this.style.animationName = "round1";
+//	},null);
+  	
+  	
   	//点击数字时
   	if (tag > 0 && tag < 9) {
-  	  dom.className = claName;
-  	  dom.innerText = item.tag;
+  	  // 如何从son 找到back? 可以用 lastElementChild, 不能直接替换, 而是增加.
+  	  changeClassName(dom,claName,"");
+//	  back.className = claName;
+  	  back.innerText = item.tag;
   	} else if (tag == 0) {
   	  // 点击 空白区域时, 扩散
-  	  dom.className = claName;
+//	  dom.className = claName;
+      changeClassName(dom,claName,"");
   	  // 进行扩散运算
   	  forZEach(arr,item.y,item.x,function (item,i,j) {
   	    start(item,arr);
   	  })
   	} else if (tag == 9) {
-  	  dom.className = "a10";
-  	  item.dom.innerText = "☸"; 
+  	  changeClassName(dom,"a10","");
+//	  dom.className = "a10";
+  	  back.innerText = "☸"; 
   	  
   	  
   	  forQEach(arr,function (item,i,j) {
   	    if (item.noClick) {
   	      item.noClick = false;
-  	      item.dom.className = 'a' + item.tag;
+//	      b.className = 'a' + item.tag;
+  	      var dom = item.dom;
+    var back = dom.lastElementChild;
+  	  changeClassName(dom,"turn1","");
+    changeClassName(back,'a' + item.tag,"");
   	      if (item.tag < 9) {
-  	        item.dom.innerText = item.tag; 
+  	        back.innerText = item.tag; 
   	      } else{
-  	        item.dom.innerText = "☸"; 
+  	        back.innerText = "☸"; 
   	      }
   	    } 
   	    
@@ -127,11 +171,14 @@ function start (item,arr) {// 翻转函数 + 扩散函数
 
 function bindEvent (oUl,arr) {
   oUl.addEventListener('click',function (e) {
+    // 这里就不能用target == Li了 因为target 应该变成了div.
   var dom = e.target;
-   if (dom.tagName == "LI") {
-    var item = dom.item;
+   if ((dom.className.indexOf("front") != -1)) {
+    var item = dom.parentNode.item;
     if (item.noClick) {
     	start(item,arr);
+    	// 要干什么?
+    	// 添加彻底翻转和周围翻转
     }
    }
   },null);
@@ -141,8 +188,9 @@ function bindEvent (oUl,arr) {
 	
 	oUl.addEventListener('contextmenu',function (e) {
 	  var dom = e.target;
-   if (dom.tagName == "LI") {
-     var item = dom.item;
+   if (dom.className.indexOf("front") != -1) {
+     console.log(123);
+     var item = dom.parentNode.item;
      if (item.noClick) {
      	if (typeof item.count == "undefined") {
      		item.count = 0;
@@ -150,19 +198,23 @@ function bindEvent (oUl,arr) {
      	switch (item.count%3){
      		case 0:
      		 dom.innerText = "✖";
-     		  dom.className = "mark";
+//   		  dom.className = "mark";
+     		  changeClassName(dom,"mark",""); 
      		  item.count += 1;
      		  showBoom (showBoomDom,--arr.boom)
      			break;
      		case 1: 
      		 dom.innerText = "？";
-     		  dom.className = "que";
+//   		  dom.className = "que";
+     		  changeClassName(dom,"que","mark"); 
      		  item.count += 1;
      		  showBoom (showBoomDom,++arr.boom);
      		 break;
      		default:
      		 dom.innerText = "";
-     		  dom.className = "";
+//   		  dom.className = "";
+     		  changeClassName(dom,"","que"); 
+        
      		  item.count += 1;
      			break;
      	}
@@ -343,6 +395,25 @@ function resizeLi (x,y,dir) {// 严格来讲, 由于格子要保持方形, 所�
 		item.style.height = width + "px";
 		item.style.lineHeight = width + 'px';// 用来让文字居中.
 	})
+	// 我特么就是这么刚,(不过下回弄响应式, 我绝对会优先选择, rem)
+	var front = document.getElementsByClassName('front');
+	var back = document.getElementsByClassName('back');
+	var up = document.getElementsByClassName('up');
+	var down = document.getElementsByClassName('down');
+	var left = document.getElementsByClassName('left');
+	var right = document.getElementsByClassName('right');
+	
+	for(var i = 0 ; i < front.length; i++) {
+	  front[i].style.transform = " rotateX(0deg) translateZ("+ width/ 2 +"px) ";
+	  back[i].style.transform = " rotateX(180deg) rotateZ(180deg) translateZ("+ width/ 2 +"px) ";
+	  up[i].style.transform = " rotateX(90deg) translateZ("+ width/ 2 +"px) ";
+	  down[i].style.transform = " rotateX(-90deg) translateZ("+ width/ 2 +"px) ";
+	  left[i].style.transform = " rotateY(-90deg) translateZ("+ width/ 2 +"px) ";
+	  right[i].style.transform = " rotateY(90deg) translateZ("+ width/ 2 +"px) ";
+	  
+	  
+	}
+	
 }
 
 document.body.onresize = function () {
