@@ -46,9 +46,10 @@
             .son{
               width: 50px;
               height: 50px;
-               position: absolute ;
-              left: 50%;
-              top: 50%;
+              display: inline-block;
+               /*position: absolute ;*/
+              /*left: 50%;*/
+              /*top: 50%;*/
               transform-style:preserve-3d;
               perspective : 800px;
               transform: ratate3d(1,1,0,180deg);
@@ -440,10 +441,6 @@
             * */
             
             
-            .son1 {
-              left: 30%;
-              top: 50%;
-            }
         </style>
     </head>
     <body>
@@ -459,6 +456,78 @@
           <div class="back"></div>
         </div>
         <div class="son son1">
+          <div class="front"></div>
+          <div class="up"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+          <div class="down"></div>
+          <div class="back"></div>
+        </div>
+        <div class="son son2">
+          <div class="front"></div>
+          <div class="up"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+          <div class="down"></div>
+          <div class="back"></div>
+        </div>
+        <div class="son son3">
+          <div class="front"></div>
+          <div class="up"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+          <div class="down"></div>
+          <div class="back"></div>
+        </div>
+        <div class="son son4">
+          <div class="front"></div>
+          <div class="up"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+          <div class="down"></div>
+          <div class="back"></div>
+        </div>
+        <div class="son son5">
+          <div class="front"></div>
+          <div class="up"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+          <div class="down"></div>
+          <div class="back"></div>
+        </div>
+        <div class="son son6">
+          <div class="front"></div>
+          <div class="up"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+          <div class="down"></div>
+          <div class="back"></div>
+        </div>
+        <div class="son son7">
+          <div class="front"></div>
+          <div class="up"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+          <div class="down"></div>
+          <div class="back"></div>
+        </div>
+        <div class="son son8">
+          <div class="front"></div>
+          <div class="up"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+          <div class="down"></div>
+          <div class="back"></div>
+        </div>
+        <div class="son son9">
+          <div class="front"></div>
+          <div class="up"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+          <div class="down"></div>
+          <div class="back"></div>
+        </div>
+        <div class="son son10">
           <div class="front"></div>
           <div class="up"></div>
           <div class="left"></div>
@@ -567,7 +636,10 @@
               var rex2 = /\sturn[1-9]/g;
                var str = "turn" +returnRandomNum(1,8);
               aniDelay(son[1],0);// 我希望延迟少一点
-              changeClassName(son[1],str,rex2);
+              for(var i = 1; i < son.length; i++) {
+                
+                changeClassName(son[i],str,rex2);
+              }
               // 并监听son2 的动画结束
               // 当动画结束时, 去掉类名
               // 类名的切换不能是简单的 覆盖.

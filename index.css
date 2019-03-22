@@ -97,6 +97,7 @@ li {
               backface-visibility: hidden;
               position: relative;
               transform: scale(0.8) rotateX(-10deg) rotateY(10deg);
+              /*border-width: 0;*/
               /*animation: round linear 2.5s infinite;*/
             }
             
@@ -125,6 +126,7 @@ li {
              
              /*transform: rotateY(90deg) translateZ(50%)  scale(0.8);*/
              background-color: #153987;
+             color: white;
            }
            .up{
              /*transform: rotateX(90deg) translateZ(50%)  scale(0.8);*/
@@ -134,7 +136,7 @@ li {
            .down{
              /*transform: rotateX(-90deg) translateZ(50%) scale(0.8);*/
              background-color: #A52A2A;
-             
+             color: deeppink;
            }
            .back{
              /*transform: rotateX(180deg) translateZ(50%) scale(0.8);*/
@@ -358,8 +360,11 @@ li {
             }
             
             /*翻转180deg八种*/
+           .turnOver {
+                transform:  rotateY(190deg) rotateX(10deg)  scale(0.8);
+           }
             .turn1{
-              animation: turn1 1s 1 forwards;
+              animation: turn1 0.1s 1 forwards;
             }
             @keyframes turn1{
               from{
@@ -446,9 +451,34 @@ li {
                 transform: rotate3d(-1,-1,0,180deg);
               }
             }
+            
+            
+            .turnDown {
+              animation: turnDown 0.1s forwards;
+            }
+            @keyframes turnDown{
+            	from{
+            	  transform: scale(0.8) rotateY(10deg)  rotateX(10deg)  ;
+            	}
+            	to{
+            	  transform: scale(0.8) rotateY(10deg)  rotateX(80deg)  ;
+            	}
+            }
+            .turnRight {
+              animation: turnRight 0.1s  forwards;
+            }
+            @keyframes turnRight{
+            	from{
+            	  transform: scale(0.8) rotateY(10deg)  rotateX(10deg)  ;
+            	}
+            	to{
+              transform: scale(0.8) rotateX(-10deg) rotateY(-80deg) ;
+            	}
+            }
+            
 
 .a0 {
-  background-color: purple;
+  background-color: antiquewhite;
   color: transparent;
 }
 
@@ -521,9 +551,12 @@ li {
 .menu div{
   width: 5vw;
   height: 5vw;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   border-radius: 50%;
   overflow: hidden;
+  background: radial-gradient(circle at 50% 50%,yellow 0%,pink 100%);
+  font-weight: bold;  
+  color: darkblue;
 }
 .menuD {
   width: 7vh;
@@ -546,9 +579,10 @@ li {
 .menuD div{
   width: 5vh;
   height: 5vh;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   border-radius: 50%;
   overflow: hidden;
+  background: radial-gradient(circle at 50% 50%,pink 0%,yellow 100%);
 }
 
 /*.restart {
