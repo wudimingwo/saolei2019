@@ -32,6 +32,7 @@ function createData(a, b, oUl, boom) {
           it.back.item = it;
           
       oUl.appendChild(dom);
+      document.getElementsByClassName('fakeBody2')[0].appendChild(oUl);
       it.tag = 0;
       it.y = i;
       it.x = j;
@@ -142,6 +143,7 @@ function start(item, arr) { // 翻转函数 + 扩散函数
       alert("game over");
     }
     if(arr.total == arr.boom1) {
+      clearInterval(getTimeStr.timer); // 用来终止计时器
       alert("恭喜你找到全部的雷");
     }
   }
@@ -166,10 +168,10 @@ function bindEvent(oUl, arr) {
   document.oncontextmenu = function(e) { // 全局范围取消右键默认事件
     e.preventDefault();
   }
-  var contextHandle = (function () {
+  var contextHandle = (function (showBoomDom) {
     var rex = /(front|right|down)/;
-  	var turnDown = /turnDown/;
-  	var turnRight = /turnRight/;
+//	var turnDown = /turnDown/;
+//	var turnRight = /turnRight/;
     return function (e) {// 发现这个反应很卡顿
     var front = e.target;
     if(rex.test(front.className)) {// 
@@ -196,7 +198,7 @@ function bindEvent(oUl, arr) {
       }
     }
   }
-  })()
+  })(showBoomDom)
   oUl.addEventListener('contextmenu', contextHandle,null)
 }
 
@@ -221,7 +223,6 @@ function getTheNumber (arr) {
 function init(x, y, boom) {
   document.getElementsByTagName('ul')[0] && document.getElementsByTagName('ul')[0].remove();
   var oUl = document.createElement('ul');
-  document.getElementsByClassName('fakeBody2')[0].appendChild(oUl);
   var arr = createData(y, x, oUl, boom);
   createLei(y, x, boom, arr);
   createNumber(arr);
