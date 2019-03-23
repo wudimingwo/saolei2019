@@ -341,6 +341,7 @@ rowDom.addEventListener('input', function() {
     val = 0;
   }
   val = val < 10 ? 10 : (val > 30 ? 30 : val);
+  data.row = val;
 })
 columnDom.addEventListener('input', function() {
   var val = parseInt(this.value);
@@ -348,6 +349,7 @@ columnDom.addEventListener('input', function() {
     val = 0;
   }
   val = val < 10 ? 10 : (val > 30 ? 30 : val);
+  data.column = val;
 })
 boomDom.addEventListener('input', function() {
   var val = parseInt(this.value);
@@ -355,6 +357,7 @@ boomDom.addEventListener('input', function() {
     val = 0;
   }
   val = val < 10 ? 10 : (val > 99 ? 99 : val);
+  data.boom = val;
 })
 
 function resizeLi(x, y, dir) { // 严格来讲, 由于格子要保持方形, 所以y值似乎没用.
